@@ -1,166 +1,168 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SUPER SHOPEE UI</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<nav class="navbar">
-    <div class="logo">SUPER SHOPEE UI</div>
-    <div class="search-bar">
-        <input type="text" placeholder="Cari produk...">
-        <button>🔍</button>
-    </div>
-    <div class="nav-links">
-        <a href="cart.html">Keranjang</a>
-        <a href="admin.html">Admin</a>
-    </div>
-</nav>
-
-<div class="categories">
-    <button>Kategori 1</button>
-    <button>Kategori 2</button>
-    <button>Kategori 3</button>
-</div>
-
-<div class="banner">
-    <img src="images/banner/banner1.jpg" alt="Promo">
-</div>
-
-<div class="product-grid" id="product-grid"></div>
-<script src="js/main.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Keranjang Belanja</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<h2>Keranjang Belanja</h2>
-<div id="cart-items"></div>
-<p>Total: Rp <span id="total-price">0</span></p>
-<a href="payment.html"><button>Checkout via ShopeePay</button></a>
-<script src="js/main.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pembayaran</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<h2>Checkout</h2>
-<p>Total: Rp 2000</p>
-<div class="shopeepay-qr">
-    <img src="images/qr/shopeepay-qr.png" alt="ShopeePay QR">
-</div>
-<button onclick="confirmPayment()">Bayar Sekarang</button>
-<script>
-function confirmPayment(){
-    alert("Pembayaran berhasil via ShopeePay! ✅");
-}
-</script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Dashboard</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<h2>Admin Dashboard</h2>
-<button onclick="addProduct()">Tambah Produk</button>
-<div id="admin-product-list"></div>
-<script src="js/admin.js"></script>
-</body>
-</html>
-const products = [
-    {id:1, name:"Gabin Original", price:2000, img:"images/products/gabin1.jpg"},
-    {id:2, name:"Cireng Ayam", price:2000, img:"images/products/cireng1.jpg"},
-    {id:3, name:"Piscok Lumer", price:2000, img:"images/products/piscok1.jpg"}
-];
-
-const grid = document.getElementById("product-grid");
-if(grid){
-    products.forEach(p=>{
-        const div = document.createElement("div");
-        div.classList.add("product-card");
-        div.innerHTML = `
-            <img src="${p.img}" />
-            <h3>${p.name}</h3>
-            <p>Rp ${p.price}</p>
-            <button onclick="addToCart(${p.id})">Tambah ke Keranjang</button>
-        `;
-        grid.appendChild(div);
-    });
-}
-
-function addToCart(id){
-    alert("Produk "+id+" ditambahkan ke keranjang!");
-}
-let adminProducts = [...products];
-
-function renderAdminProducts(){
-    const list = document.getElementById("admin-product-list");
-    list.innerHTML="";
-    adminProducts.forEach((p,index)=>{
-        const div = document.createElement("div");
-        div.innerHTML = `
-            ${p.name} | Rp ${p.price}
-            <button onclick="editProduct(${index})">Edit</button>
-            <button onclick="deleteProduct(${index})">Hapus</button>
-        `;
-        list.appendChild(div);
-    });
-}
-renderAdminProducts();
-
-function addProduct(){
-    const name = prompt("Nama produk?");
-    const price = parseInt(prompt("Harga produk?"));
-    const img = prompt("Link gambar?");
-    adminProducts.push({id:Date.now(), name, price, img});
-    renderAdminProducts();
-}
-
-function editProduct(i){
-    adminProducts[i].name = prompt("Nama baru?", adminProducts[i].name);
-    adminProducts[i].price = parseInt(prompt("Harga baru?", adminProducts[i].price));
-    adminProducts[i].img = prompt("Link gambar baru?", adminProducts[i].img);
-    renderAdminProducts();
-}
-
-function deleteProduct(i){
-    if(confirm("Hapus produk ini?")){
-        adminProducts.splice(i,1);
-        renderAdminProducts();
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CEMILAN - Cemilan Premium Pilihan Keluarga</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+    * { font-family: 'Poppins', sans-serif; }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-}
-body{font-family:Arial,sans-serif;margin:0;padding:0;background:#f5f5f5;}
-.navbar{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:#ff5722;color:white;}
-.navbar .logo{font-weight:bold;font-size:20px;}
-.navbar .search-bar input{padding:5px;}
-.navbar .search-bar button{padding:5px;}
-.nav-links a{color:white;margin-left:10px;text-decoration:none;}
-.categories{display:flex;justify-content:center;margin:10px 0;}
-.categories button{margin:0 5px;padding:5px 10px;border:none;background:#ff9800;color:white;border-radius:4px;cursor:pointer;}
-.banner img{width:100%;border-radius:8px;margin-bottom:10px;}
-.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding:10px;}
-.product-card{background:white;padding:10px;border-radius:8px;text-align:center;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
-.product-card img{width:100%;height:100px;object-fit:cover;border-radius:4px;}
-.product-card button{padding:5px 10px;border:none;background:#ff5722;color:white;border-radius:4px;cursor:pointer;margin-top:5px;}
-#admin-product-list div{margin:5px 0;padding:5px;background:white;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,0.1);}
-#admin-product-list button{margin-left:5px;padding:3px 5px;border:none;background:#ff9800;color:white;border-radius:3px;cursor:pointer;}
-.shopeepay-qr img{width:200px;display:block;margin:10px 0;}
+    
+    .card-3d {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-style: preserve-3d;
+    }
+    .card-3d:hover {
+      transform: translateY(-15px) rotateX(5deg);
+      box-shadow: 0 30px 60px rgba(102, 126, 234, 0.3);
+    }
+    
+    .quantity-btn {
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+    .quantity-btn:active { transform: scale(0.9); }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.75);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      overflow-y: auto;
+      backdrop-filter: blur(5px);
+    }
+    .modal.active { display: flex; }
+    
+    .product-image {
+      width: 100%; height: 200px;
+      object-fit: cover;
+      border-radius: 1rem 1rem 0 0;
+      transition: transform 0.4s ease;
+    }
+    .card-3d:hover .product-image { transform: scale(1.05); }
+    
+    .variant-btn {
+      transition: all 0.3s ease;
+      border: 2px solid #e5e7eb;
+    }
+    .variant-btn.selected {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-color: #667eea;
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    .out-of-stock-overlay {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) rotate(-15deg);
+      background: rgba(220, 38, 38, 0.95);
+      color: white;
+      padding: 0.5rem 2rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border-radius: 0.5rem;
+      z-index: 10;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    
+    .star {
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+    .star:hover { transform: scale(1.3); }
+    .star.filled { color: #fbbf24; text-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
+    .star.empty { color: #d1d5db; }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide-in { animation: slideIn 0.4s ease; }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .float-animation { animation: float 3s ease-in-out infinite; }
+    
+    @media (max-width: 768px) {
+      .product-image { height: 160px; }
+      .out-of-stock-overlay { font-size: 1.2rem; padding: 0.4rem 1.5rem; }
+      .card-3d { margin-bottom: 0.5rem; }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-cyan-50 to-sky-50 min-h-screen">
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+    import { getDatabase, ref, onValue, set, push, remove } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyDgR-rFu6EXvoQ_axBshxkCdaoAIHBNQU4",
+      authDomain: "cemilan-shope.firebaseapp.com",
+      databaseURL: "https://cemilan-shope-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "cemilan-shope",
+      storageBucket: "cemilan-shope.firebasestorage.app",
+      messagingSenderId: "762517245803",
+      appId: "1:762517245803:web:7bbff124ea28dd3647062e"
+    };
+    
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    
+    window.firebaseDB = { db, ref, onValue, set, push, remove };
+  </script>
+
+  <!-- Navbar -->
+  <nav class="bg-white/90 backdrop-blur-xl shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-2 md:space-x-3">
+          <div class="w-10 h-10 md:w-14 md:h-14 bg-gradient-to-br from-purple-500 via-pink-500 to-blue-500 rounded-full flex items-center justify-center text-xl md:text-3xl shadow-lg float-animation">🍪</div>
+          <div>
+            <h1 class="text-lg md:text-2xl font-bold gradient-text">CEMILAN</h1>
+            <p class="text-xs text-gray-500 hidden md:block" id="navTagline">Cemilan Enak Pilihan Keluarga</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-3 md:space-x-6">
+          <div class="hidden md:flex items-center space-x-6">
+            <a href="#produk" class="text-gray-700 hover:text-purple-600 font-medium transition text-sm md:text-base">Produk</a>
+            <a href="#review" class="text-gray-700 hover:text-purple-600 font-medium transition text-sm md:text-base">Review</a>
+          </div>
+          <button onclick="showAdminLogin()" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 md:px-5 py-2 md:py-2.5 rounded-full font-semibold hover:shadow-lg transition transform hover:scale-105 text-xs md:text-base">
+            <span class="hidden md:inline">Admin</span>
+            <span class="md:hidden">⚙️</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="py-8 md:py-16 px-4 md:px-6">
+    <div class="max-w-7xl mx-auto text-center">
+      <h2 class="text-3xl md:text-5xl lg:text-7xl font-extrabold text-gray-800 mb-3 md:mb-4">
+        <span class="gradient-text">CEMILAN</span>
+      </h2>
+      <p class="text-sm md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto mb-6 md:mb-8 px-4" id="heroDescription">
+        Selamat datang di CEMILAN! Kami menyediakan berbagai cemilan lezat dan berkualitas dengan harga terjangkau.
+      </p>
+      <div class="flex justify-center items-center space-x-4">
+        <div class="flex
