@@ -503,16 +503,16 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
   <script>
     // Firebase Configuration
-   const firebaseConfig = {
-    apiKey: "AIzaSyDKiE6lTIAsCtKJ0vua1W1iIVObOsht-uo",
-    authDomain: "dagang-cemilan.firebaseapp.com",
-    databaseURL: "https://dagang-cemilan-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "dagang-cemilan",
-    storageBucket: "dagang-cemilan.firebasestorage.app",
-    messagingSenderId: "781891376919",
-    appId: "1:781891376919:web:a891802669d993f4204952",
-    measurementId: "G-GR7PWD8349"
-  };
+    const firebaseConfig = {
+      apiKey: "AIzaSyDgR-rFu6EXvoQ_axBshxkCdaoAIHBNQU4",
+      authDomain: "cemilan-shope.firebaseapp.com",
+      databaseURL: "https://cemilan-shope-default-rtdb.firebaseio.com",
+      projectId: "cemilan-shope",
+      storageBucket: "cemilan-shope.firebasestorage.app",
+      messagingSenderId: "762517245803",
+      appId: "1:762517245803:web:7bbff124ea28dd3647062e",
+      measurementId: "G-3LQ2JT95VW"
+    };
 
     // Initialize Firebase
     let firebaseEnabled = false;
@@ -1835,7 +1835,7 @@
       document.getElementById('productPrice').value = product.price;
       document.getElementById('productInStock').checked = product.inStock;
       document.getElementById('productHasVariants').checked = product.hasVariants;
-      document.getElementById('productVariants').value = passList.remove('hidden');
+      document.getElementById('productVariants').value = product.variants ? product.variants.join(', ') : '';
       
       toggleVariants();
       document.getElementById('productFormModal').classList.add('active');
@@ -1849,11 +1849,11 @@
       renderProducts();
     }
 
-    function toggleStock(id) {
+    async function toggleStock(id) {
       const product = products.find(p => p.id === id);
       if (product) {
         product.inStock = !product.inStock;
-        saveData();
+        await saveData();
         renderAdminProducts();
         renderProducts();
       }
