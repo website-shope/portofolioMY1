@@ -503,16 +503,18 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
   <script>
     // Firebase Configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyDgR-rFu6EXvoQ_axBshxkCdaoAIHBNQU4",
-      authDomain: "cemilan-shope.firebaseapp.com",
-      databaseURL: "https://cemilan-shope-default-rtdb.firebaseio.com",
-      projectId: "cemilan-shope",
-      storageBucket: "cemilan-shope.firebasestorage.app",
-      messagingSenderId: "762517245803",
-      appId: "1:762517245803:web:7bbff124ea28dd3647062e",
-      measurementId: "G-3LQ2JT95VW"
-    };
+    // ⚠️ PENTING: Ganti config ini dengan config dari Firebase Console Anda!
+    // Cara: Firebase Console → Project Settings → Your apps → Web app → Copy firebaseConfig
+   const firebaseConfig = {
+    apiKey: "AIzaSyDKiE6lTIAsCtKJ0vua1W1iIVObOsht-uo",
+    authDomain: "dagang-cemilan.firebaseapp.com",
+    databaseURL: "https://dagang-cemilan-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "dagang-cemilan",
+    storageBucket: "dagang-cemilan.firebasestorage.app",
+    messagingSenderId: "781891376919",
+    appId: "1:781891376919:web:a891802669d993f4204952",
+    measurementId: "G-GR7PWD8349"
+  };
 
     // Initialize Firebase
     let firebaseEnabled = false;
@@ -1890,65 +1892,87 @@
     }
 
     async function saveProduct() {
-      const name = document.getElementById('productName').value.trim();
-      const price = parseInt(document.getElementById('productPrice').value);
-      const inStock = document.getElementById('productInStock').checked;
-      const hasVariants = document.getElementById('productHasVariants').checked;
-      const variantsText = document.getElementById('productVariants').value.trim();
+      try {
+        console.log('🔵 saveProduct() dipanggil');
+        
+        const name = document.getElementById('productName').value.trim();
+        const priceValue = document.getElementById('productPrice').value;
+        const price = parseInt(priceValue);
+        const inStock = document.getElementById('productInStock').checked;
+        const hasVariants = document.getElementById('productHasVariants').checked;
+        const variantsText = document.getElementById('productVariants').value.trim();
 
-      if (!name || !price) {
-        alert('⚠️ Mohon lengkapi nama dan harga produk!');
-        return;
-      }
+        console.log('📝 Data form:', { name, price, inStock, hasVariants, variantsText });
 
-      const variants = hasVariants && variantsText 
-        ? variantsText.split(',').map(v => v.trim()).filter(v => v)
-        : [];
+        if (!name || !priceValue || isNaN(price) || price <= 0) {
+          alert('⚠️ Mohon lengkapi nama dan harga produk dengan benar!');
+          return;
+        }
 
-      const editId = document.getElementById('editProductId').value;
-      
-      if (editId) {
-        const product = products.find(p => p.id === parseInt(editId));
-        if (product) {
-          product.name = name;
-          product.price = price;
-          product.inStock = inStock;
-          product.hasVariants = hasVariants;
-          product.variants = variants;
-          
-          if (hasVariants) {
-            const oldQuantities = product.quantities || {};
-            product.quantities = {};
-            product.selectedVariant = variants[0] || null;
-            variants.forEach(v => {
-              product.quantities[v] = oldQuantities[v] || 0;
-            });
-          } else {
-            product.quantity = product.quantity || 0;
-            product.selectedVariant = null;
-          }
+        const variants = hasVariants && variantsText 
+          ? variantsText.split(',').map(v => v.trim()).filter(v => v)
+          : [];
 
-          const fileInput = document.getElementById('productImage');
-          if (fileInput.files.length > 0) {
-            const reader = new FileReader();
-            reader.onload = async function(e) {
-              product.image = e.target.result;
+        const editId = document.getElementById('editProductId').value;
+        
+        if (editId) {
+          console.log('✏️ Mode Edit - ID:', editId);
+          const product = products.find(p => p.id === parseInt(editId));
+          if (product) {
+            console.log('📦 Produk ditemukan:', product.name);
+            
+            product.name = name;
+            product.price = price;
+            product.inStock = inStock;
+            product.hasVariants = hasVariants;
+            product.variants = variants;
+            
+            if (hasVariants) {
+              const oldQuantities = product.quantities || {};
+              product.quantities = {};
+              product.selectedVariant = variants[0] || null;
+              variants.forEach(v => {
+                product.quantities[v] = oldQuantities[v] || 0;
+              });
+            } else {
+              product.quantity = product.quantity || 0;
+              product.selectedVariant = null;
+            }
+
+            const fileInput = document.getElementById('productImage');
+            if (fileInput.files.length > 0) {
+              console.log('🖼️ Upload gambar baru');
+              const reader = new FileReader();
+              reader.onload = async function(e) {
+                product.image = e.target.result;
+                console.log('💾 Menyimpan ke Firebase...');
+                await saveData();
+                closeProductForm();
+                renderAdminProducts();
+                renderProducts();
+                console.log('✅ Update berhasil dengan gambar baru!');
+                alert('✅ Produk berhasil diupdate!');
+              };
+              reader.readAsDataURL(fileInput.files[0]);
+            } else {
+              console.log('💾 Menyimpan ke Firebase (tanpa gambar baru)...');
               await saveData();
               closeProductForm();
               renderAdminProducts();
               renderProducts();
+              console.log('✅ Update berhasil!');
               alert('✅ Produk berhasil diupdate!');
-            };
-            reader.readAsDataURL(fileInput.files[0]);
+            }
           } else {
-            await saveData();
-            closeProductForm();
-            renderAdminProducts();
-            renderProducts();
-            alert('✅ Produk berhasil diupdate!');
+            console.error('❌ Produk tidak ditemukan dengan ID:', editId);
+            alert('❌ Error: Produk tidak ditemukan!');
           }
         }
-      } else {
+      } catch (error) {
+        console.error('❌ Error di saveProduct():', error);
+        alert('❌ Error: ' + error.message);
+      }
+    } else {
         const fileInput = document.getElementById('productImage');
         if (fileInput.files.length === 0) {
           alert('⚠️ Mohon pilih gambar produk!');
