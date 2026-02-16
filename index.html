@@ -505,7 +505,7 @@
     // Firebase Configuration
     // ⚠️ PENTING: Ganti config ini dengan config dari Firebase Console Anda!
     // Cara: Firebase Console → Project Settings → Your apps → Web app → Copy firebaseConfig
-   const firebaseConfig = {
+    const firebaseConfig = {
     apiKey: "AIzaSyDKiE6lTIAsCtKJ0vua1W1iIVObOsht-uo",
     authDomain: "dagang-cemilan.firebaseapp.com",
     databaseURL: "https://dagang-cemilan-default-rtdb.asia-southeast1.firebasedatabase.app",
@@ -1972,7 +1972,9 @@
         console.error('❌ Error di saveProduct():', error);
         alert('❌ Error: ' + error.message);
       }
-    } else {
+    }
+
+    // Tambah produk baru
         const fileInput = document.getElementById('productImage');
         if (fileInput.files.length === 0) {
           alert('⚠️ Mohon pilih gambar produk!');
