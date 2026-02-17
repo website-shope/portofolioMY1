@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hidayatul Fahmi | Ultimate Portfolio</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;scroll-behavior:smooth;}
+    body{background:linear-gradient(-45deg,#020824,#081a4a,#001f6b,#3a0ca3);background-size:400% 400%;animation:bgMove 10s ease infinite;color:white;overflow-x:hidden;transition:0.4s;}
+    body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:url("https://www.transparenttextures.com/patterns/stardust.png");opacity:0.25;z-index:-1;}
+    body.light{background:linear-gradient(-45deg,#f7f9ff,#dbe9ff,#ffffff,#cfe0ff);color:#111;}
+    header{position:fixed;top:0;width:100%;padding:18px 10%;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.55);backdrop-filter:blur(16px);z-index:999;}
+    body.light header{background:rgba(255,255,255,0.75);}
+    header h1{font-size:22px;font-weight:700;color:#00d9ff;}
+    nav a{margin-left:18px;text-decoration:none;color:white;font-weight:500;transition:.3s;}
+    body.light nav a{color:#111;}
+    nav a:hover{color:#00d9ff;}
+    .toggle{margin-left:25px;cursor:pointer;padding:8px 14px;border-radius:12px;border:none;background:linear-gradient(90deg,#00d9ff,#6a5cff);color:white;font-weight:bold;}
+    .hero{min-height:100vh;display:flex;justify-content:space-between;align-items:center;padding:140px 10%;gap:60px;}
+    .hero-text{max-width:580px;animation:fadeInUp 1s ease;}
+    .hero-text h2{font-size:58px;margin-bottom:18px;line-height:1.1;}
+    .hero-text span{background:linear-gradient(90deg,#00d9ff,#6a5cff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .hero-text p{font-size:18px;opacity:.9;margin-bottom:28px;line-height:1.7;}
+    .btn{padding:14px 32px;border-radius:16px;background:linear-gradient(90deg,#00d9ff,#6a5cff);color:white;font-weight:600;text-decoration:none;display:inline-block;transition:.35s;box-shadow:0 0 25px rgba(0,217,255,.4);}
+    .btn:hover{transform:scale(1.08);box-shadow:0 0 45px rgba(0,217,255,.75);}
+    .hero-img img{width:310px;border-radius:50%;border:5px solid rgba(0,217,255,.35);box-shadow:0 0 80px rgba(0,217,255,.4);animation:float 3s ease-in-out infinite;}
+    section{padding:95px 10%;text-align:center;}
+    section h3{font-size:44px;margin-bottom:15px;color:#00d9ff;}
+    section p{opacity:.85;margin-bottom:30px;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;margin-top:45px;}
+    .card{padding:35px;border-radius:24px;background:rgba(255,255,255,.08);border:1px solid rgba(0,217,255,.18);backdrop-filter:blur(14px);transition:.5s;opacity:0;transform:translateY(45px);}
+    .card.show{opacity:1;transform:translateY(0);}
+    .card:hover{transform:scale(1.05);border:1px solid rgba(0,217,255,.5);box-shadow:0 0 35px rgba(0,217,255,.35);}
+    .price{font-size:28px;font-weight:bold;color:#00ffcc;margin-top:12px;}
+    form{max-width:520px;margin:auto;display:flex;flex-direction:column;gap:15px;}
+    input,textarea{padding:14px;border-radius:14px;border:none;outline:none;font-size:15px;}
+    button{padding:14px;border:none;border-radius:16px;cursor:pointer;font-weight:bold;background:linear-gradient(90deg,#00d9ff,#6a5cff);color:white;transition:.3s;}
+    button:hover{transform:scale(1.05);}
+    footer{padding:30px;text-align:center;opacity:.7;background:rgba(0,0,0,.45);}
+    .wa-float{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;font-size:28px;padding:15px 18px;border-radius:50%;text-decoration:none;box-shadow:0 0 20px rgba(0,0,0,.4);transition:.3s;z-index:999;}
+    .wa-float:hover{transform:scale(1.15);}
+    #topBtn{position:fixed;bottom:90px;right:22px;padding:14px 16px;border:none;border-radius:50%;background:linear-gradient(90deg,#00d9ff,#6a5cff);color:white;font-size:18px;cursor:pointer;box-shadow:0 0 20px rgba(0,217,255,.4);transition:.3s;}
+    #topBtn:hover{transform:scale(1.15);}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+    @keyframes bgMove{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+    @media(max-width:850px){.hero{flex-direction:column;text-align:center;}}
+  </style>
+</head>
+<body>
+<header>
+  <h1>Hidayatul Fahmi</h1>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Order</a>
+    <button class="toggle" onclick="toggleMode()">🌙 Mode</button>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-text">
+    <h2>Saya Developer <span id="typing"></span></h2>
+    <p>
+      Saya siap membantu Anda membuat <b>Website Premium Modern</b> dan  
+      <b>Roblox Maps Cinematic yang keren</b>.  
+      <br><br>
+      💰 <b>Harga mulai dari Rp150.000 saja!</b>  
+      Cepat, profesional, dan siap digunakan untuk bisnis maupun game 🚀
+    </p>
+    <a class="btn" href="https://wa.me/6285175005374" target="_blank">
+      Order Sekarang 🚀
+    </a>
+  </div>
+
+  <div class="hero-img">
+    <img src="profile.png" alt="Hidayatul Fahmi">
+  </div>
+</div>
+
+<section id="services">
+  <h3>My Services</h3>
+  <p>Hasil premium dengan kualitas agency level</p>
+
+  <div class="grid">
+    <div class="card">
+      <h4>🌐 Website Modern</h4>
+      <p>Landing page, toko online, portfolio profesional fast loading.</p>
+    </div>
+
+    <div class="card">
+      <h4>🎮 Roblox Maps</h4>
+      <p>Adventure map, simulator map, city map dengan style cinematic.</p>
+    </div>
+
+    <div class="card">
+      <h4>⚡ Super Fast Support</h4>
+      <p>Respon cepat, pengerjaan rapi, hasil memuaskan.</p>
+    </div>
+  </div>
+</section>
+
+
+<section id="portfolio">
+  <h3>Portfolio Demo Projects</h3>
+  <p>Beberapa contoh website & project yang bisa Anda pesan</p>
+  <div class="grid">
+    <div class="card show">
+      <h4>🍔 Bisnis Makanan</h4>
+      <p>Landing page modern untuk usaha kuliner.</p>
+      <a class="btn" href="demo-food.html">Lihat Demo</a>
+    </div>
+    <div class="card show">
+      <h4>🛒 Toko Online Produk</h4>
+      <p>Website shop dengan tombol order WhatsApp.</p>
+      <a class="btn" href="demo-shop.html">Lihat Demo</a>
+    </div>
+    <div class="card show">
+      <h4>🎮 Game Roblox Map</h4>
+      <p>Showcase map Roblox cinematic premium.</p>
+      <a class="btn" href="demo-roblox.html">Lihat Demo</a>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <h3>Pricing Packages</h3>
+  <p>Pilih paket terbaik sesuai kebutuhan Anda (mulai Rp150.000)</p>
+
+  <div class="grid">
+    <div class="card">
+      <h4>🌐 Basic Website</h4>
+      <p>Landing page sederhana untuk UMKM.</p>
+      <div class="price">Rp150.000</div>
+    </div>
+
+    <div class="card">
+      <h4>🚀 Pro Website</h4>
+      <p>Premium design + animasi + tombol order WA.</p>
+      <div class="price">Rp250.000</div>
+    </div>
+
+    <div class="card">
+      <h4>🎮 Roblox Map Premium</h4>
+      <p>Custom map cinematic + optimized.</p>
+      <div class="price">Rp200.000+</div>
+    </div>
+
+    <div class="card">
+      <h4>🔥 Bundle Package</h4>
+      <p>Website + Roblox Map sekaligus (Best Deal)</p>
+      <div class="price">Rp300.000+</div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <h3>FAQ</h3>
+  <p>Pertanyaan umum dari client</p>
+
+  <div class="grid">
+    <div class="card">
+      <h4>⏳ Berapa lama pengerjaan?</h4>
+      <p>Website 1–3 hari. Roblox map tergantung ukuran project.</p>
+    </div>
+
+    <div class="card">
+      <h4>💳 Bisa DP dulu?</h4>
+      <p>Bisa, pembayaran fleksibel sesuai kesepakatan.</p>
+    </div>
+
+    <div class="card">
+      <h4>📞 Apakah dapat revisi?</h4>
+      <p>Ya, revisi tersedia sampai client puas.</p>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <h3>Client Reviews</h3>
+  <p>Beberapa review client yang sudah order</p>
+
+  <div class="card" id="reviewBox">
+    ⭐⭐⭐⭐⭐ <br>
+    "Websitenya modern banget dan cepat!"  
+    <br><b>- Client UMKM</b>
+  </div>
+</section>
+
+<section id="contact">
+  <h3>Order Sekarang</h3>
+  <p>Isi form → otomatis terkirim ke WhatsApp</p>
+
+  <form onsubmit="sendWA(); return false;">
+    <input id="nama" type="text" placeholder="Nama Anda" required>
+    <input id="project" type="text" placeholder="Project yang ingin dibuat" required>
+    <textarea id="detail" placeholder="Detail pesanan..."></textarea>
+    <button type="submit">Kirim ke WhatsApp 🚀</button>
+  </form>
+</section>
+
+<footer>
+  © 2026 Hidayatul Fahmi | Ultimate Premium Portfolio
+</footer>
+
+<a href="https://wa.me/6285175005374" target="_blank" class="wa-float">💬</a>
+<button onclick="window.scrollTo({top:0,behavior:'smooth'})" id="topBtn">⬆</button>
+
+<script>
+  const cards=document.querySelectorAll(".card");
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("show");
+      }
+    });
+  },{threshold:0.2});
+  cards.forEach(card=>observer.observe(card));
+
+  function toggleMode(){
+    document.body.classList.toggle("light");
+  }
+
+  const textList=["Website Premium 🌐","Roblox Maps Keren 🎮","Fast & Modern 🚀"];
+  let index=0,char=0;
+  const typingEl=document.getElementById("typing");
+
+  function typingEffect(){
+    if(char<textList[index].length){
+      typingEl.innerHTML+=textList[index].charAt(char);
+      char++;
+      setTimeout(typingEffect,90);
+    } else {
+      setTimeout(()=>{
+        typingEl.innerHTML="";
+        char=0;
+        index=(index+1)%textList.length;
+        typingEffect();
+      },1200);
+    }
+  }
+  typingEffect();
+
+  const reviews=[
+    '⭐⭐⭐⭐⭐ <br>"Websitenya modern banget dan cepat!"<br><b>- Client UMKM</b>',
+    '⭐⭐⭐⭐⭐ <br>"Map Roblox detailnya luar biasa premium!"<br><b>- Roblox Dev</b>',
+    '⭐⭐⭐⭐⭐ <br>"Respon cepat, hasil memuaskan banget!"<br><b>- Online Shop Owner</b>'
+  ];
+  let rIndex=0;
+  const box=document.getElementById("reviewBox");
+
+  setInterval(()=>{
+    rIndex=(rIndex+1)%reviews.length;
+    box.innerHTML=reviews[rIndex];
+  },3500);
+
+  function sendWA(){
+    let nama=document.getElementById("nama").value;
+    let project=document.getElementById("project").value;
+    let detail=document.getElementById("detail").value;
+
+    let pesan=`Halo Hidayatul, saya mau order jasa:%0A%0A👤 Nama: ${nama}%0A📌 Project: ${project}%0A📝 Detail: ${detail}`;
+    window.open("https://wa.me/6285175005374?text="+pesan,"_blank");
+  }
+</script>
+</body>
+</html>
