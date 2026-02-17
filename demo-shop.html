@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TokoKita — Belanja Online Murah & Terpercaya</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #EE4D2D;
+  --red2: #FF6B4A;
+  --orange: #FF8C00;
+  --yellow: #FFD700;
+  --dark: #111827;
+  --gray: #6B7280;
+  --light: #F9FAFB;
+  --border: #E5E7EB;
+  --white: #ffffff;
+  --green: #10B981;
+  --blue: #3B82F6;
+  --radius: 14px;
+  --shadow: 0 4px 20px rgba(0,0,0,.08);
+  --shadow-hover: 0 12px 40px rgba(238,77,45,.18);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); overflow-x: hidden; }
+
+/* ===== TOP BAR ===== */
+.topbar {
+  background: var(--red); color: white;
+  padding: 7px 5%; font-size: 12px; font-weight: 600;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.topbar-right { display: flex; gap: 18px; }
+.topbar a { color: rgba(255,255,255,.85); text-decoration: none; }
+.topbar a:hover { color: white; }
+
+/* ===== HEADER ===== */
+header {
+  background: var(--red); padding: 12px 5%;
+  display: flex; align-items: center; gap: 20px;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,.15);
+}
+.logo-wrap { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.logo-box {
+  background: white; border-radius: 10px;
+  padding: 6px 12px; display: flex; align-items: center; gap: 6px;
+}
+.logo-box span:first-child { font-size: 20px; }
+.logo-box span:last-child {
+  font-family: 'Syne', sans-serif; font-size: 18px;
+  font-weight: 800; color: var(--red);
+}
+.search-wrap {
+  flex: 1; display: flex; background: white; border-radius: 8px; overflow: hidden;
+}
+.search-wrap input {
+  flex: 1; padding: 11px 16px; border: none; outline: none;
+  font-family: 'Inter', sans-serif; font-size: 14px; color: var(--dark);
+}
+.search-wrap select {
+  border: none; border-left: 1.5px solid var(--border); padding: 0 12px;
+  font-size: 13px; color: var(--gray); outline: none; cursor: pointer;
+  background: #FFF5F5;
+}
+.search-btn {
+  background: var(--red); border: none; padding: 0 20px;
+  color: white; font-size: 18px; cursor: pointer; transition: .2s;
+}
+.search-btn:hover { background: #d43b1e; }
+.header-icons { display: flex; gap: 18px; align-items: center; flex-shrink: 0; }
+.hicon {
+  display: flex; flex-direction: column; align-items: center;
+  color: white; font-size: 11px; font-weight: 600; cursor: pointer;
+  gap: 3px; position: relative;
+}
+.hicon span:first-child { font-size: 22px; }
+.hbadge {
+  position: absolute; top: -4px; right: -6px;
+  background: var(--yellow); color: var(--dark);
+  border-radius: 50%; width: 17px; height: 17px;
+  font-size: 10px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ===== NAV ===== */
+nav {
+  background: #C0392B; padding: 0 5%;
+  display: flex; gap: 0; overflow-x: auto;
+}
+nav a {
+  color: rgba(255,255,255,.85); text-decoration: none;
+  padding: 10px 18px; font-size: 13px; font-weight: 600;
+  white-space: nowrap; transition: .2s;
+  display: flex; align-items: center; gap: 5px;
+}
+nav a:hover, nav a.active { color: white; background: rgba(255,255,255,.12); }
+
+/* ===== HERO BANNER ===== */
+.hero-wrap { padding: 18px 5%; display: flex; gap: 14px; }
+.hero-main {
+  flex: 1; border-radius: var(--radius); overflow: hidden;
+  position: relative; min-height: 260px;
+  background: linear-gradient(135deg, #EE4D2D 0%, #FF8C00 60%, #FFD700 100%);
+  display: flex; align-items: center; padding: 36px;
+}
+.hero-main::after {
+  content: "";
+  position: absolute; right: 0; top: 0; width: 50%; height: 100%;
+  background: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80') center/cover;
+  opacity: .35;
+}
+.hero-text { position: relative; z-index: 2; max-width: 55%; }
+.hero-tag {
+  background: white; color: var(--red);
+  display: inline-block; padding: 4px 12px; border-radius: 20px;
+  font-size: 12px; font-weight: 800; margin-bottom: 12px;
+}
+.hero-main h1 {
+  font-family: 'Syne', sans-serif; font-size: 34px; font-weight: 800;
+  color: white; line-height: 1.15; margin-bottom: 10px;
+  text-shadow: 0 2px 12px rgba(0,0,0,.2);
+}
+.hero-main p { color: rgba(255,255,255,.9); font-size: 14px; font-weight: 600; margin-bottom: 18px; }
+.hero-cta {
+  background: white; color: var(--red); border: none;
+  padding: 11px 24px; border-radius: 8px; font-weight: 800;
+  font-size: 14px; cursor: pointer; transition: .25s;
+  font-family: 'Inter', sans-serif;
+}
+.hero-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+.hero-side { display: flex; flex-direction: column; gap: 14px; width: 200px; flex-shrink: 0; }
+.hero-side-card {
+  border-radius: var(--radius); overflow: hidden;
+  position: relative; height: 120px;
+  display: flex; align-items: flex-end; padding: 14px;
+}
+.hero-side-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-side-card .label {
+  position: relative; z-index: 2;
+  color: white; font-weight: 800; font-size: 13px;
+  text-shadow: 0 1px 6px rgba(0,0,0,.6);
+}
+
+/* ===== PROMO STRIP ===== */
+.promo-strip {
+  background: white; border-top: 2px solid #FEE2E2; border-bottom: 2px solid #FEE2E2;
+  padding: 10px 5%; display: flex; gap: 0; overflow: hidden;
+}
+.promo-track {
+  display: flex; gap: 50px; animation: marquee 22s linear infinite; white-space: nowrap;
+}
+.promo-track span { font-size: 13px; font-weight: 700; color: var(--red); display: flex; align-items: center; gap: 6px; }
+@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ===== FLASH SALE ===== */
+.section { padding: 20px 5%; }
+.sec-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px;
+}
+.sec-title {
+  font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800;
+  display: flex; align-items: center; gap: 10px;
+}
+.flash-timer {
+  display: flex; align-items: center; gap: 6px; margin-left: 12px;
+}
+.timer-block {
+  background: var(--red); color: white;
+  border-radius: 6px; padding: 4px 8px;
+  font-size: 16px; font-weight: 900; min-width: 34px; text-align: center;
+}
+.timer-sep { font-weight: 900; color: var(--red); font-size: 18px; }
+.see-all {
+  color: var(--red); text-decoration: none; font-size: 13px;
+  font-weight: 700; display: flex; align-items: center; gap: 4px;
+}
+
+/* ===== PRODUCT GRID ===== */
+.prod-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 14px;
+}
+.prod-card {
+  background: white; border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow);
+  transition: .3s; cursor: pointer; position: relative;
+}
+.prod-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+.prod-img-wrap { position: relative; overflow: hidden; }
+.prod-img {
+  width: 100%; height: 190px; object-fit: cover; display: block;
+  transition: transform .4s;
+}
+.prod-card:hover .prod-img { transform: scale(1.06); }
+.prod-badge {
+  position: absolute; top: 8px; left: 8px;
+  background: var(--red); color: white;
+  font-size: 11px; font-weight: 800;
+  padding: 3px 9px; border-radius: 6px;
+}
+.prod-badge.flash { background: linear-gradient(90deg,#EE4D2D,#FF8C00); }
+.prod-badge.new { background: var(--green); }
+.prod-badge.hot { background: #7C3AED; }
+.prod-wishlist {
+  position: absolute; top: 8px; right: 8px;
+  background: white; border-radius: 50%; width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.12);
+  transition: .2s;
+}
+.prod-wishlist:hover { transform: scale(1.15); }
+.prod-info { padding: 12px; }
+.prod-name {
+  font-size: 13px; font-weight: 600; color: var(--dark);
+  margin-bottom: 5px; line-height: 1.4;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.prod-price { font-size: 17px; font-weight: 800; color: var(--red); margin-bottom: 4px; }
+.prod-price-ori { font-size: 12px; color: var(--gray); text-decoration: line-through; margin-bottom: 6px; }
+.prod-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+.prod-rating { font-size: 12px; font-weight: 700; color: #F59E0B; display: flex; align-items: center; gap: 2px; }
+.prod-sold { font-size: 11px; color: var(--gray); font-weight: 600; }
+.prod-loc { font-size: 11px; color: var(--gray); font-weight: 600; display: flex; align-items: center; gap: 2px; }
+.prod-dot { color: var(--border); }
+.btn-beli {
+  width: 100%; background: linear-gradient(90deg, var(--red), var(--red2));
+  color: white; border: none; padding: 9px; border-radius: 8px;
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px;
+  cursor: pointer; transition: .2s; display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.btn-beli:hover { opacity: .9; transform: scale(1.02); }
+
+/* ===== KATEGORI ===== */
+.cat-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+}
+.cat-item {
+  background: white; border-radius: var(--radius); padding: 18px 12px;
+  text-align: center; box-shadow: var(--shadow); cursor: pointer;
+  transition: .25s; border: 2px solid transparent;
+}
+.cat-item:hover { border-color: var(--red); transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.cat-icon { font-size: 30px; margin-bottom: 8px; }
+.cat-name { font-size: 12px; font-weight: 700; color: var(--dark); }
+
+/* ===== BANNER ROW ===== */
+.banner-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; padding: 0 5% 20px; }
+.banner-card {
+  border-radius: var(--radius); overflow: hidden; height: 130px; position: relative; cursor: pointer;
+}
+.banner-card img { width: 100%; height: 100%; object-fit: cover; transition: .35s; }
+.banner-card:hover img { transform: scale(1.05); }
+.banner-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,.55), transparent);
+  padding: 20px; display: flex; flex-direction: column; justify-content: center;
+}
+.banner-overlay h4 { color: white; font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+.banner-overlay span { color: rgba(255,255,255,.8); font-size: 11px; font-weight: 600; }
+
+/* ===== FITUR ===== */
+.features-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px; padding: 0 5% 30px;
+}
+.feat-box {
+  background: white; border-radius: var(--radius); padding: 20px 16px;
+  display: flex; align-items: center; gap: 14px;
+  box-shadow: var(--shadow); transition: .25s;
+}
+.feat-box:hover { box-shadow: 0 8px 30px rgba(238,77,45,.14); transform: translateY(-3px); }
+.feat-icon-box {
+  width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+  background: #FEE2E2; display: flex; align-items: center; justify-content: center; font-size: 22px;
+}
+.feat-box h5 { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+.feat-box p { font-size: 11px; color: var(--gray); font-weight: 600; line-height: 1.4; }
+
+/* ===== REKOMENDASI ===== */
+.rec-section { background: white; padding: 24px 5%; margin-bottom: 20px; }
+
+/* ===== TESTIMONIALS ===== */
+.testi-section { background: #FFF5F5; padding: 30px 5%; }
+.testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 16px; }
+.testi-card {
+  background: white; border-radius: var(--radius); padding: 20px;
+  box-shadow: var(--shadow); border-left: 4px solid var(--red); transition: .25s;
+}
+.testi-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.testi-stars { color: #F59E0B; font-size: 14px; margin-bottom: 8px; }
+.testi-text { font-size: 13px; color: var(--dark); line-height: 1.7; margin-bottom: 14px; font-weight: 500; }
+.testi-user { display: flex; align-items: center; gap: 10px; }
+.tavi { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg,var(--red),var(--orange)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px; }
+.tname { font-weight: 700; font-size: 13px; }
+.tdate { font-size: 11px; color: var(--gray); font-weight: 500; }
+
+/* ===== ORDER FORM ===== */
+#order-form {
+  background: linear-gradient(135deg, #FFF5F5, #FFF8F0);
+  padding: 50px 5%;
+  border-top: 3px solid #FEE2E2;
+}
+.form-wrap {
+  max-width: 600px; margin: 0 auto;
+  background: white; border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(238,77,45,.14); overflow: hidden;
+}
+.form-top {
+  background: linear-gradient(135deg, var(--red), var(--red2));
+  padding: 26px 30px; display: flex; align-items: center; gap: 14px;
+}
+.form-top-icon {
+  width: 52px; height: 52px; background: rgba(255,255,255,.2); border-radius: 14px;
+  display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0;
+}
+.form-top h2 { color: white; font-size: 20px; font-weight: 800; margin-bottom: 3px; }
+.form-top p { color: rgba(255,255,255,.8); font-size: 12px; font-weight: 600; }
+.form-body { padding: 28px 30px; display: flex; flex-direction: column; gap: 16px; }
+.fgroup label { display: block; font-size: 12px; font-weight: 700; color: var(--gray); margin-bottom: 7px; text-transform: uppercase; letter-spacing: .4px; }
+.fgroup input, .fgroup select, .fgroup textarea {
+  width: 100%; padding: 12px 14px;
+  background: var(--light); border: 2px solid var(--border);
+  border-radius: 10px; font-family: 'Inter', sans-serif;
+  font-size: 14px; font-weight: 500; color: var(--dark); outline: none; transition: .2s;
+}
+.fgroup input:focus, .fgroup select:focus, .fgroup textarea:focus {
+  border-color: var(--red); background: white;
+  box-shadow: 0 0 0 4px rgba(238,77,45,.1);
+}
+.fgroup textarea { resize: vertical; min-height: 80px; }
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.selected-prod {
+  background: #FFF5F5; border: 2px dashed var(--red);
+  border-radius: 10px; padding: 12px 14px;
+  display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600;
+}
+.selected-prod img { width: 44px; height: 44px; object-fit: cover; border-radius: 8px; }
+.selected-prod-info { flex: 1; }
+.selected-prod-name { font-weight: 700; font-size: 13px; color: var(--dark); }
+.selected-prod-price { font-weight: 800; font-size: 14px; color: var(--red); }
+.clear-prod { cursor: pointer; color: var(--gray); font-size: 18px; font-weight: 900; margin-left: auto; }
+.btn-submit {
+  background: linear-gradient(135deg, var(--red), var(--red2));
+  color: white; border: none; padding: 15px;
+  border-radius: 12px; font-family: 'Inter', sans-serif;
+  font-weight: 800; font-size: 15px; cursor: pointer; transition: .3s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  box-shadow: 0 6px 20px rgba(238,77,45,.4); margin-top: 4px;
+}
+.btn-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(238,77,45,.5); }
+.demo-note {
+  text-align: center; font-size: 12px; color: var(--gray); font-weight: 600;
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+}
+
+/* ===== POPUP ===== */
+.popup-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.55); z-index: 9999;
+  align-items: center; justify-content: center;
+}
+.popup-box {
+  background: white; border-radius: 24px; padding: 40px 34px;
+  max-width: 420px; width: 92%; text-align: center;
+  box-shadow: 0 30px 80px rgba(0,0,0,.3);
+  animation: popIn .35s ease;
+}
+.popup-icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--green), #059669);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 34px; margin: 0 auto 18px;
+}
+.popup-box h2 { font-family: 'Syne', sans-serif; font-size: 22px; color: var(--dark); margin-bottom: 8px; }
+.popup-box p { color: var(--gray); font-size: 14px; line-height: 1.6; font-weight: 500; margin-bottom: 8px; }
+.popup-demo-note {
+  background: #FFF5F5; border: 2px solid #FEE2E2; border-radius: 10px;
+  padding: 12px 14px; font-size: 12px; font-weight: 700; color: var(--red); margin: 16px 0;
+}
+.popup-close {
+  background: linear-gradient(135deg, var(--red), var(--red2));
+  color: white; border: none; padding: 13px 32px;
+  border-radius: 12px; font-family: 'Inter', sans-serif;
+  font-weight: 800; font-size: 15px; cursor: pointer; width: 100%;
+  transition: .25s;
+}
+.popup-close:hover { opacity: .9; transform: translateY(-2px); }
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed; top: 78px; right: 24px;
+  background: var(--dark); color: white;
+  padding: 12px 20px; border-radius: 10px;
+  font-weight: 700; font-size: 13px;
+  box-shadow: 0 8px 25px rgba(0,0,0,.2);
+  transform: translateX(120%); transition: .4s; z-index: 9998;
+}
+.toast.show { transform: translateX(0); }
+
+/* ===== FOOTER ===== */
+footer { background: var(--dark); color: rgba(255,255,255,.75); padding: 40px 5% 24px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 36px; margin-bottom: 32px; }
+.footer-brand p { font-size: 13px; line-height: 1.7; opacity: .7; margin-top: 10px; font-weight: 500; }
+.footer-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.footer-logo span:first-child { font-size: 22px; }
+.footer-logo span:last-child { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--red); }
+.footer-col h5 { color: white; font-weight: 800; margin-bottom: 14px; font-size: 14px; }
+.footer-col a { display: block; color: rgba(255,255,255,.6); text-decoration: none; font-size: 13px; font-weight: 500; margin-bottom: 8px; transition: .2s; }
+.footer-col a:hover { color: var(--red); }
+.footer-pay { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.pay-badge { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); border-radius: 6px; padding: 4px 10px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,.7); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; opacity: .6; font-weight: 500; }
+
+/* ===== BACK TO TOP ===== */
+.back-top {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--red); color: white;
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; cursor: pointer; box-shadow: 0 4px 15px rgba(238,77,45,.4);
+  transition: .25s; z-index: 99; text-decoration: none; border: none;
+}
+.back-top:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(238,77,45,.55); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero-side, .topbar { display: none; }
+  .hero-wrap { padding: 14px 4%; }
+  .hero-main h1 { font-size: 24px; }
+  .banner-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .frow { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>📦 Gratis ongkir untuk semua produk hari ini!</span>
+  <div class="topbar-right">
+    <a href="#">Daftar</a>
+    <a href="#">Masuk</a>
+    <a href="#">Notifikasi</a>
+    <a href="#">Bantuan</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-wrap">
+    <div class="logo-box">
+      <span>🛍️</span>
+      <span>TokoKita</span>
+    </div>
+  </div>
+  <div class="search-wrap">
+    <input type="text" placeholder="Cari produk, brand, kategori...">
+    <select>
+      <option>Semua</option>
+      <option>Fashion</option>
+      <option>Skincare</option>
+      <option>Elektronik</option>
+    </select>
+    <button class="search-btn">🔍</button>
+  </div>
+  <div class="header-icons">
+    <div class="hicon" onclick="scrollToOrder()">
+      <span>🛒</span>
+      <span>Keranjang</span>
+      <div class="hbadge" id="cartBadge">0</div>
+    </div>
+    <div class="hicon">
+      <span>🔔</span>
+      <span>Notifikasi</span>
+    </div>
+    <div class="hicon">
+      <span>👤</span>
+      <span>Akun</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="active">🏠 Beranda</a>
+  <a href="#">👗 Fashion</a>
+  <a href="#">💄 Kecantikan</a>
+  <a href="#">📱 Elektronik</a>
+  <a href="#">🏠 Rumah & Dapur</a>
+  <a href="#">⚽ Olahraga</a>
+  <a href="#">📚 Buku</a>
+  <a href="#">🧸 Mainan</a>
+  <a href="#" style="color:#FFD700; font-weight:800;">🔥 Flash Sale</a>
+</nav>
+
+<!-- HERO BANNER -->
+<div class="hero-wrap">
+  <div class="hero-main">
+    <div class="hero-text">
+      <div class="hero-tag">🔥 MEGA SALE — Hingga 70% OFF!</div>
+      <h1>Belanja Hemat,<br>Kualitas Premium</h1>
+      <p>Ribuan produk pilihan dengan harga terbaik.<br>Pengiriman cepat ke seluruh Indonesia.</p>
+      <button class="hero-cta" onclick="document.getElementById('flash-section').scrollIntoView({behavior:'smooth'})">Belanja Sekarang →</button>
+    </div>
+  </div>
+  <div class="hero-side">
+    <div class="hero-side-card" style="background:#1a1a2e">
+      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80" alt="Sepatu">
+      <div class="label">👟 Sepatu Terbaru</div>
+    </div>
+    <div class="hero-side-card">
+      <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&q=80" alt="Skincare">
+      <div class="label">💄 Skincare Hits</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROMO STRIP -->
+<div class="promo-strip">
+  <div class="promo-track">
+    <span>🔥 Flash Sale setiap jam 12.00 & 20.00</span>
+    <span>🚚 Gratis Ongkir ke seluruh Indonesia</span>
+    <span>💳 Cicilan 0% semua bank</span>
+    <span>🎁 Voucher Rp50.000 untuk member baru</span>
+    <span>⭐ 10 juta+ produk terpercaya</span>
+    <span>🔥 Flash Sale setiap jam 12.00 & 20.00</span>
+    <span>🚚 Gratis Ongkir ke seluruh Indonesia</span>
+    <span>💳 Cicilan 0% semua bank</span>
+    <span>🎁 Voucher Rp50.000 untuk member baru</span>
+    <span>⭐ 10 juta+ produk terpercaya</span>
+  </div>
+</div>
+
+<!-- KATEGORI -->
+<div class="section">
+  <div class="sec-head">
+    <div class="sec-title">Kategori Populer</div>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-item"><div class="cat-icon">👗</div><div class="cat-name">Fashion Wanita</div></div>
+    <div class="cat-item"><div class="cat-icon">👔</div><div class="cat-name">Fashion Pria</div></div>
+    <div class="cat-item"><div class="cat-icon">💄</div><div class="cat-name">Kecantikan</div></div>
+    <div class="cat-item"><div class="cat-icon">📱</div><div class="cat-name">Handphone</div></div>
+    <div class="cat-item"><div class="cat-icon">💻</div><div class="cat-name">Laptop</div></div>
+    <div class="cat-item"><div class="cat-icon">🏠</div><div class="cat-name">Rumah Tangga</div></div>
+    <div class="cat-item"><div class="cat-icon">⚽</div><div class="cat-name">Olahraga</div></div>
+    <div class="cat-item"><div class="cat-icon">🧸</div><div class="cat-name">Mainan & Hobi</div></div>
+    <div class="cat-item"><div class="cat-icon">🎒</div><div class="cat-name">Tas & Koper</div></div>
+    <div class="cat-item"><div class="cat-icon">📚</div><div class="cat-name">Buku</div></div>
+  </div>
+</div>
+
+<!-- FLASH SALE -->
+<div class="section" id="flash-section" style="background:white; border-radius:18px; margin:0 5% 20px; padding:24px;">
+  <div class="sec-head">
+    <div class="sec-title">
+      ⚡ Flash Sale
+      <div class="flash-timer">
+        <div class="timer-block" id="t-h">02</div>
+        <span class="timer-sep">:</span>
+        <div class="timer-block" id="t-m">45</div>
+        <span class="timer-sep">:</span>
+        <div class="timer-block" id="t-s">00</div>
+      </div>
+    </div>
+    <a href="#" class="see-all">Lihat Semua →</a>
+  </div>
+  <div class="prod-grid">
+
+    <!-- Sepatu Sneakers -->
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <img class="prod-img" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80" alt="Sepatu Sneakers">
+        <div class="prod-badge flash">-45%</div>
+        <div class="prod-wishlist" onclick="toggleWish(this)">🤍</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">Sepatu Sneakers Running Pria Sport Breathable Anti Slip</div>
+        <div class="prod-price">Rp 189.000</div>
+        <div class="prod-price-ori">Rp 349.000</div>
+        <div class="prod-meta">
+          <span class="prod-rating">⭐ 4.9</span>
+          <span class="prod-dot">|</span>
+          <span class="prod-sold">12rb+ terjual</span>
+        </div>
+        <div class="prod-loc">📍 Jakarta Barat</div>
+        <button class="btn-beli" style="margin-top:10px" onclick="addToCart('Sepatu Sneakers Running Pria', 'Rp189.000', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100&q=80')">🛒 Beli Sekarang</button>
+      </div>
+    </div>
+
+    <!-- Tas Wanita -->
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <img class="prod-img" src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80" alt="Tas Wanita">
+        <div class="prod-badge flash">-38%</div>
+        <div class="prod-wishlist" onclick="toggleWish(this)">🤍</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">Tas Selempang Wanita Premium Korean Style Kulit PU</div>
+        <div class="prod-price">Rp 129.000</div>
+        <div class="prod-price-ori">Rp 210.000</div>
+        <div class="prod-meta">
+          <span class="prod-rating">⭐ 4.8</span>
+          <span class="prod-dot">|</span>
+          <span class="prod-sold">8.4rb terjual</span>
+        </div>
+        <div class="prod-loc">📍 Bandung</div>
+        <button class="btn-beli" style="margin-top:10px" onclick="addToCart('Tas Selempang Wanita Premium', 'Rp129.000', 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=100&q=80')">🛒 Beli Sekarang</button>
+      </div>
+    </div>
+
+    <!-- Skincare -->
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <img class="prod-img" src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&q=80" alt="Skincare">
+        <div class="prod-badge new">Baru</div>
+        <div class="prod-wishlist" onclick="toggleWish(this)">🤍</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">Serum Vitamin C Brightening 30ml Original BPOM Terdaftar</div>
+        <div class="prod-price">Rp 95.000</div>
+        <div class="prod-price-ori">Rp 145.000</div>
+        <div class="prod-meta">
+          <span class="prod-rating">⭐ 5.0</span>
+          <span class="prod-dot">|</span>
+          <span class="prod-sold">31rb+ terjual</span>
+        </div>
+        <div class="prod-loc">📍 Surabaya</div>
+        <button class="btn-beli" style="margin-top:10px" onclick="addToCart('Serum Vitamin C Brightening', 'Rp95.000', 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=100&q=80')">🛒 Beli Sekarang</button>
+      </div>
+    </div>
+
+    <!-- Kemeja Pria -->
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <img class="prod-img" src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400&q=80" alt="Kemeja">
+        <div class="prod-badge flash">-52%</div>
+        <div class="prod-wishlist" onclick="toggleWish(this)">🤍</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">Kemeja Pria Slim Fit Casual Premium Katun Rayon Anti Kusut</div>
+        <div class="prod-price">Rp 79.000</div>
+        <div class="prod-price-ori">Rp 165.000</div>
+        <div class="prod-meta">
+          <span class="prod-rating">⭐ 4.7</span>
+          <span class="prod-dot">|</span>
+          <span class="prod-sold">5.2rb terjual</span>
+        </div>
+        <div class="prod-loc">📍 Yogyakarta</div>
+        <button class="btn-beli" style="margin-top:10px" onclick="addToCart('Kemeja Pria Slim Fit Casual', 'Rp79.000', 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=100&q=80')">🛒 Beli Sekarang</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- BANNER ROW -->
+<div class="banner-row">
+  <div class="banner-card">
+    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80" alt="Fashion Sale">
+    <div class="banner-overlay"><h4>Fashion Week</h4><span>Diskon hingga 70%</span></div>
+  </div>
+  <div class="banner-card">
+    <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600&q=80" alt="Elektronik">
+    <div class="banner-overlay"><h4>Elektronik</h4><span>Cicilan 0% 12 bulan</span></div>
+  </div>
+  <div class="banner-card">
+    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&q=80" alt="Beauty">
+    <div class="banner-overlay"><h4>Beauty Fest</h4><span>Beli 2 Gratis 1</span></div>
+  </div>
+</div>
+
+<!-- FITUR UNGGULAN -->
+<div class="features-row">
+  <div class="feat-box">
+    <div class="feat-icon-box">🚚</div>
+    <div><h5>Gratis Ongkir</h5><p>Ke seluruh Indonesia tanpa min. pembelian</p></div>
+  </div>
+  <div class="feat-box">
+    <div class="feat-icon-box">🔄</div>
+    <div><h5>Garansi Uang Kembali</h5><p>30 hari jika produk tidak sesuai deskripsi</p></div>
+  </div>
+  <div class="feat-box">
+    <div class="feat-icon-box">🔒</div>
+    <div><h5>Pembayaran Aman</h5><p>SSL terenkripsi, data terlindungi 100%</p></div>
+  </div>
+  <div class="feat-box">
+    <div class="feat-icon-box">⭐</div>
+    <div><h5>Produk Original</h5><p>Semua penjual terverifikasi & bersertifikat</p></div>
+  </div>
+  <div class="feat-box">
+    <div class="feat-icon-box">💬</div>
+    <div><h5>CS 24 Jam</h5><p>Tim support siap bantu kapanpun kamu butuh</p></div>
+  </div>
+</div>
+
+<!-- REKOMENDASI -->
+<div class="rec-section">
+  <div class="sec-head">
+    <div class="sec-title">✨ Rekomendasi Untukmu</div>
+    <a href="#" class="see-all">Lihat Semua →</a>
+  </div>
+  <div class="prod-grid">
+
+    <!-- Jam Tangan -->
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <img class="prod-img" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80" alt="Jam Tangan">
+        <div class="prod-badge hot">Terlaris</div>
+        <div class="prod-wishlist" onclick="toggleWish(this)">🤍</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">Jam Tangan Pria Analog Stainless Anti Air Water Resistant 30M</div>
+        <div class="prod-price">Rp 245.000</div>
+        <div class="prod-price-ori">Rp 420.000</div>
+        <div class="prod-meta">
+          <span class="prod-rating">⭐ 4.9</span>
+          <span class="prod-dot">|</span>
+          <span class="prod-sold">9.8rb terjual</span>
+        </div>
+        <div class="prod-loc">📍 Jakarta Selatan</div>
+        <button class="btn-beli" style="margin-top:10px" onclick="addToCart('Jam Tangan Pria Analog', 'Rp245.000', 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=100&q=80')">🛒 Beli Sekarang</button>
+      </div>
+    </div>
+
+    <!-- Dress Wanita -->
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <img class="prod-img" src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&q=80" alt="Dress">
+        <div class="prod-badge new">Baru</div>
+        <div class="prod-wishlist" onclick="toggleWish(this)">🤍</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">Dress Wanita Midi Floral Korean Style Babydoll Casual Cantik</div>
+        <div class="prod-price">Rp 115.000</div>
+        <div class="prod-price-ori">Rp 195.000</div>
+        <div class="prod-meta">
+          <span class="prod-rating">⭐ 4.8</span>
+          <span class="prod-dot">|</span>
+          <span class="prod-sold">4.1rb terjual</span>
+        </div>
+        <div class="prod-loc">📍 Semarang</div>
+        <button class="btn-beli" style="margin-top:10px" onclick="addToCart('Dress Wanita Midi Floral', 'Rp115.000', 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=100&q=80')">🛒 Beli Sekarang</button>
+      </div>
+    </div>
+
+    <!-- Headphone -->
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <img class="prod-img" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80" alt="Headphone">
+        <div class="prod-badge flash">-60%</div>
+        <div class="prod-wishlist" onclick="toggleWish(this)">🤍</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">Headphone Bluetooth Wireless Over Ear Bass Booster ANC 40Jam</div>
+        <div class="prod-price">Rp 320.000</div>
+        <div class="prod-price-ori">Rp 800.000</div>
+        <div class="prod-meta">
+          <span class="prod-rating">⭐ 4.7</span>
+          <span class="prod-dot">|</span>
+          <span class="prod-sold">7.6rb terjual</span>
+        </div>
+        <div class="prod-loc">📍 Denpasar</div>
+        <button class="btn-beli" style="margin-top:10px" onclick="addToCart('Headphone Bluetooth Wireless', 'Rp320.000', 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100&q=80')">🛒 Beli Sekarang</button>
+      </div>
+    </div>
+
+    <!-- Parfum -->
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <img class="prod-img" src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80" alt="Parfum">
+        <div class="prod-badge hot">Terlaris</div>
+        <div class="prod-wishlist" onclick="toggleWish(this)">🤍</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">Parfum Pria Wanita Eau de Parfum Tahan Lama 50ml Premium</div>
+        <div class="prod-price">Rp 75.000</div>
+        <div class="prod-price-ori">Rp 130.000</div>
+        <div class="prod-meta">
+          <span class="prod-rating">⭐ 4.9</span>
+          <span class="prod-dot">|</span>
+          <span class="prod-sold">22rb+ terjual</span>
+        </div>
+        <div class="prod-loc">📍 Medan</div>
+        <button class="btn-beli" style="margin-top:10px" onclick="addToCart('Parfum Eau de Parfum Premium', 'Rp75.000', 'https://images.unsplash.com/photo-1541643600914-78b084683702?w=100&q=80')">🛒 Beli Sekarang</button>
+      </div>
+    </div>
+
+    <!-- Kacamata -->
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <img class="prod-img" src="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=400&q=80" alt="Kacamata">
+        <div class="prod-badge new">Baru</div>
+        <div class="prod-wishlist" onclick="toggleWish(this)">🤍</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">Kacamata Sunglasses Pria Wanita UV400 Polarized Anti Silau</div>
+        <div class="prod-price">Rp 58.000</div>
+        <div class="prod-price-ori">Rp 115.000</div>
+        <div class="prod-meta">
+          <span class="prod-rating">⭐ 4.6</span>
+          <span class="prod-dot">|</span>
+          <span class="prod-sold">3.9rb terjual</span>
+        </div>
+        <div class="prod-loc">📍 Malang</div>
+        <button class="btn-beli" style="margin-top:10px" onclick="addToCart('Kacamata Sunglasses UV400', 'Rp58.000', 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=100&q=80')">🛒 Beli Sekarang</button>
+      </div>
+    </div>
+
+    <!-- Dompet -->
+    <div class="prod-card">
+      <div class="prod-img-wrap">
+        <img class="prod-img" src="https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&q=80" alt="Dompet">
+        <div class="prod-badge flash">-35%</div>
+        <div class="prod-wishlist" onclick="toggleWish(this)">🤍</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">Dompet Pria Kulit Asli Slim Card Holder Bifold Anti RFID</div>
+        <div class="prod-price">Rp 149.000</div>
+        <div class="prod-price-ori">Rp 229.000</div>
+        <div class="prod-meta">
+          <span class="prod-rating">⭐ 4.8</span>
+          <span class="prod-dot">|</span>
+          <span class="prod-sold">6.7rb terjual</span>
+        </div>
+        <div class="prod-loc">📍 Makassar</div>
+        <button class="btn-beli" style="margin-top:10px" onclick="addToCart('Dompet Pria Kulit Asli Slim', 'Rp149.000', 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=100&q=80')">🛒 Beli Sekarang</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TESTIMONIAL -->
+<div class="testi-section">
+  <div class="sec-head">
+    <div class="sec-title">💬 Ulasan Pembeli</div>
+    <span style="font-size:13px; color:var(--gray); font-weight:600;">⭐ 4.9 dari 120.000+ ulasan</span>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+      <div class="testi-text">"Sepatunya kualitas bagus banget! Bahan breathable, sol anti slip beneran works. Pengiriman super cepat, 1 hari udah sampai. Packing aman."</div>
+      <div class="testi-user"><div class="tavi">B</div><div><div class="tname">Budi Santoso</div><div class="tdate">2 hari lalu · Jakarta</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+      <div class="testi-text">"Serum vitamin C-nya cocok di kulit sensitif saya. Dalam 2 minggu pemakaian wajah udah lebih cerah dan glowing. Recommended 100%!"</div>
+      <div class="testi-user"><div class="tavi">A</div><div><div class="tname">Ayu Pertiwi</div><div class="tdate">5 hari lalu · Surabaya</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+      <div class="testi-text">"Headphone wireless-nya suara jernih banget, bass-nya mantap! Battery tahan lama, sudah 2 hari pakai belum habis. Worth the price!"</div>
+      <div class="testi-user"><div class="tavi">R</div><div><div class="tname">Rizky Hamdani</div><div class="tdate">1 minggu lalu · Bandung</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER FORM -->
+<div id="order-form">
+  <div style="text-align:center; margin-bottom:28px;">
+    <div style="font-family:'Syne',sans-serif; font-size:26px; font-weight:800; margin-bottom:6px;">Form Pemesanan</div>
+    <div style="font-size:14px; color:var(--gray); font-weight:500;">Isi detail di bawah untuk menyelesaikan pembelianmu</div>
+  </div>
+  <div class="form-wrap">
+    <div class="form-top">
+      <div class="form-top-icon">🛒</div>
+      <div>
+        <h2>Checkout Pesanan</h2>
+        <p>Langkah terakhir sebelum pesanan dikirim</p>
+      </div>
+    </div>
+    <div class="form-body">
+
+      <!-- Produk terpilih -->
+      <div class="fgroup" id="selProdWrap" style="display:none">
+        <label>Produk Dipilih</label>
+        <div class="selected-prod">
+          <img id="selProdImg" src="" alt="">
+          <div class="selected-prod-info">
+            <div class="selected-prod-name" id="selProdName">—</div>
+            <div class="selected-prod-price" id="selProdPrice">—</div>
+          </div>
+          <span class="clear-prod" onclick="clearProd()">✕</span>
+        </div>
+      </div>
+
+      <!-- Data diri -->
+      <div class="frow">
+        <div class="fgroup">
+          <label>Nama Lengkap</label>
+          <input id="f-nama" type="text" placeholder="Nama penerima...">
+        </div>
+        <div class="fgroup">
+          <label>No. Telepon</label>
+          <input id="f-hp" type="tel" placeholder="08xxxxxxxxxx">
+        </div>
+      </div>
+
+      <div class="fgroup">
+        <label>Alamat Pengiriman</label>
+        <input id="f-alamat" type="text" placeholder="Jl. nama jalan, No. rumah, RT/RW...">
+      </div>
+
+      <div class="frow">
+        <div class="fgroup">
+          <label>Kota / Kabupaten</label>
+          <input id="f-kota" type="text" placeholder="Kota tujuan...">
+        </div>
+        <div class="fgroup">
+          <label>Kode Pos</label>
+          <input id="f-kodepos" type="text" placeholder="12345">
+        </div>
+      </div>
+
+      <!-- Produk pilihan -->
+      <div class="frow">
+        <div class="fgroup">
+          <label>Pilih Produk</label>
+          <select id="f-produk">
+            <option value="">-- Pilih Produk --</option>
+            <option>Sepatu Sneakers Running Pria (Rp189.000)</option>
+            <option>Tas Selempang Wanita Premium (Rp129.000)</option>
+            <option>Serum Vitamin C Brightening (Rp95.000)</option>
+            <option>Kemeja Pria Slim Fit Casual (Rp79.000)</option>
+            <option>Jam Tangan Pria Analog (Rp245.000)</option>
+            <option>Dress Wanita Midi Floral (Rp115.000)</option>
+            <option>Headphone Bluetooth Wireless (Rp320.000)</option>
+            <option>Parfum Eau de Parfum Premium (Rp75.000)</option>
+            <option>Kacamata Sunglasses UV400 (Rp58.000)</option>
+            <option>Dompet Pria Kulit Asli Slim (Rp149.000)</option>
+          </select>
+        </div>
+        <div class="fgroup">
+          <label>Jumlah</label>
+          <select id="f-qty">
+            <option>1 pcs</option>
+            <option>2 pcs</option>
+            <option>3 pcs</option>
+            <option>4 pcs</option>
+            <option>5+ pcs</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="fgroup">
+        <label>Metode Pengiriman</label>
+        <select id="f-ekspedisi">
+          <option>JNE Regular (Gratis Ongkir)</option>
+          <option>J&T Express (Gratis Ongkir)</option>
+          <option>SiCepat REG (Gratis Ongkir)</option>
+          <option>AnterAja (Gratis Ongkir)</option>
+          <option>Gosend Same Day (+Rp20.000)</option>
+        </select>
+      </div>
+
+      <div class="fgroup">
+        <label>Catatan untuk Penjual (opsional)</label>
+        <textarea id="f-catatan" placeholder="Contoh: ukuran L warna hitam, tolong packing ekstra bubble wrap..."></textarea>
+      </div>
+
+      <button class="btn-submit" onclick="submitDemo()">
+        <span>✅</span> Buat Pesanan
+      </button>
+      <div class="demo-note">🎨 Ini halaman demo portofolio — tidak terhubung ke sistem nyata</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo"><span>🛍️</span><span>TokoKita</span></div>
+      <p>Platform belanja online terpercaya dengan jutaan produk pilihan dari seller terverifikasi di seluruh Indonesia.</p>
+      <div class="footer-pay">
+        <div class="pay-badge">BCA</div>
+        <div class="pay-badge">Mandiri</div>
+        <div class="pay-badge">GoPay</div>
+        <div class="pay-badge">OVO</div>
+        <div class="pay-badge">QRIS</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Belanja</h5>
+      <a href="#">Fashion Wanita</a>
+      <a href="#">Fashion Pria</a>
+      <a href="#">Kecantikan</a>
+      <a href="#">Elektronik</a>
+      <a href="#">Flash Sale</a>
+    </div>
+    <div class="footer-col">
+      <h5>Bantuan</h5>
+      <a href="#">Cara Pemesanan</a>
+      <a href="#">Cara Pembayaran</a>
+      <a href="#">Lacak Pesanan</a>
+      <a href="#">Pengembalian</a>
+      <a href="#">Pusat Bantuan</a>
+    </div>
+    <div class="footer-col">
+      <h5>Tentang</h5>
+      <a href="#">Tentang Kami</a>
+      <a href="#">Jadi Seller</a>
+      <a href="#">Blog</a>
+      <a href="#">Karir</a>
+      <a href="#">Kebijakan Privasi</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 TokoKita · Dibuat oleh Hidayatul Fahmi</span>
+    <span>🔒 Transaksi Aman & Terpercaya</span>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ Produk ditambahkan!</div>
+
+<!-- POPUP SUKSES DEMO -->
+<div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <div class="popup-icon">✅</div>
+    <h2>Pesanan Berhasil!</h2>
+    <p>Terima kasih telah berbelanja di <b>TokoKita</b>.<br>Pesananmu sedang diproses dan akan segera dikirimkan.</p>
+    <div class="popup-demo-note">🎨 Ini adalah tampilan demo portofolio.<br>Versi live akan terhubung ke sistem pemesanan nyata.</div>
+    <button class="popup-close" onclick="closePopup()">Kembali Belanja</button>
+  </div>
+</div>
+
+<script>
+  // ===== FLASH SALE TIMER =====
+  let totalSec = 2 * 3600 + 45 * 60;
+  function updateTimer() {
+    const h = Math.floor(totalSec / 3600);
+    const m = Math.floor((totalSec % 3600) / 60);
+    const s = totalSec % 60;
+    document.getElementById('t-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('t-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('t-s').textContent = String(s).padStart(2,'0');
+    if (totalSec > 0) totalSec--;
+  }
+  updateTimer();
+  setInterval(updateTimer, 1000);
+
+  // ===== WISHLIST TOGGLE =====
+  function toggleWish(el) {
+    el.textContent = el.textContent === '🤍' ? '❤️' : '🤍';
+    showToast(el.textContent === '❤️' ? '❤️ Ditambahkan ke Wishlist!' : '🤍 Dihapus dari Wishlist');
+  }
+
+  // ===== CART =====
+  let cartCount = 0;
+  function addToCart(name, price, img) {
+    cartCount++;
+    document.getElementById('cartBadge').textContent = cartCount;
+
+    // Isi form
+    document.getElementById('selProdName').textContent = name;
+    document.getElementById('selProdPrice').textContent = price;
+    document.getElementById('selProdImg').src = img;
+    document.getElementById('selProdWrap').style.display = 'block';
+
+    // Set dropdown
+    const sel = document.getElementById('f-produk');
+    for (let i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].text.startsWith(name.substring(0,15))) {
+        sel.selectedIndex = i; break;
+      }
+    }
+
+    showToast('🛒 ' + name.substring(0,25) + '... ditambahkan!');
+    scrollToOrder();
+  }
+
+  function clearProd() {
+    document.getElementById('selProdWrap').style.display = 'none';
+    document.getElementById('f-produk').selectedIndex = 0;
+  }
+
+  function scrollToOrder() {
+    document.getElementById('order-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ===== TOAST =====
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  // ===== SUBMIT DEMO =====
+  function submitDemo() {
+    const nama = document.getElementById('f-nama').value.trim();
+    const produk = document.getElementById('f-produk').value;
+    if (!nama || !produk) {
+      showToast('⚠️ Isi nama & pilih produk terlebih dahulu!');
+      return;
+    }
+    document.getElementById('popup').style.display = 'flex';
+  }
+
+  function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+    ['f-nama','f-hp','f-alamat','f-kota','f-kodepos','f-catatan'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('f-produk').selectedIndex = 0;
+    document.getElementById('f-qty').selectedIndex = 0;
+    document.getElementById('f-ekspedisi').selectedIndex = 0;
+    clearProd();
+  }
+</script>
+</body>
+</html>
